@@ -1,9 +1,9 @@
 <?php
 
-class Struts_Options_Tabbed extends Struts_Options {
+class IProperty_Struts_Options_Tabbed extends IProperty_Struts_Options {
 	public function __construct( $slug, $name, $menu_label = NULL, $template_file = NULL ) {
 		if ( NULL === $template_file ) {
-			$template_file = STRUTS_TEMPLATE_DIR . 'tabbed_sections.php';
+			$template_file = IPROPERTY_STRUTS_TEMPLATE_DIR . 'tabbed_sections.php';
 		}
 
 		parent::__construct( $slug, $name, $menu_label, $template_file );

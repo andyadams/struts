@@ -1,6 +1,6 @@
 <?php
 
-abstract class Struts_Option {
+abstract class IProperty_Struts_Option {
 	protected $_name, $_valid_values, $_value, $_type, $_default_value,
 	          $_tab, $_label, $_description, $_parent_name, $_validation_function,
               $_to_html_function, $_preview_function;

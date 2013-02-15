@@ -1,6 +1,6 @@
 <?php
 
-class Struts_Section {
+class IProperty_Struts_Section {
 	protected $_id, $_title, $_description, $_parent_name, $_options, $_priority;
 
 	public function __construct( $id, $title, $description, $parent_name, $priority = 35 ) {
@@ -92,7 +92,7 @@ class Struts_Section {
 		return $this;
 	}
 
-	public function add_option( Struts_Option $option ) {
+	public function add_option( IProperty_Struts_Option $option ) {
 		$this->_options[$option->name()] = $option;
 	}
 }

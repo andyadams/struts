@@ -1,6 +1,6 @@
 <?php
 
-class Struts_Option_Checkbox extends Struts_Option {
+class IProperty_Struts_Option_Checkbox extends IProperty_Struts_Option {
 
 	public function input_html() {
 		$id = esc_attr( $this->html_id() );

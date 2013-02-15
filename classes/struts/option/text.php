@@ -1,6 +1,6 @@
 <?php
 
-class Struts_Option_Text extends Struts_Option {
+class IProperty_Struts_Option_Text extends IProperty_Struts_Option {
 	protected $_is_url;
 
 	public function is_url( $is_url = NULL ) {

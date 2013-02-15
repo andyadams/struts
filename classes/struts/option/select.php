@@ -1,6 +1,6 @@
 <?php
 
-class Struts_Option_Select extends Struts_Option {
+class IProperty_Struts_Option_Select extends IProperty_Struts_Option {
 	public function input_html() {
 		$id = esc_attr( $this->html_id() );
 		$name = esc_attr( $this->html_name() );

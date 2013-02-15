@@ -1,6 +1,6 @@
 <?php
 
-class Struts_Options {
+class IProperty_Struts_Options {
 	protected $_sections, $_all_options, $_name, $_slug, $_menu_label, $_template_file, $_stranded_options, $_is_initialized;
 
 	public function __construct( $slug, $name, $menu_label = NULL, $template_file = NULL ) {
@@ -22,7 +22,7 @@ class Struts_Options {
 		$this->menu_label( $menu_label );
 
 		if ( NULL === $template_file ) {
-			$template_file = STRUTS_TEMPLATE_DIR . 'default.php';
+			$template_file = IPROPERTY_STRUTS_TEMPLATE_DIR . 'default.php';
 		}
 
 		$this->template_file( $template_file );
@@ -109,7 +109,7 @@ class Struts_Options {
 	}
 
 	public function is_plugin() {
-		return Struts::config( 'plugin' );
+		return IProperty_Struts::config( 'plugin' );
 	}
 
 	/***** WordPress setup *****/
@@ -152,7 +152,7 @@ class Struts_Options {
 			wp_enqueue_script( 'farbtastic' );
 			wp_enqueue_script(
 				'struts-admin',
-				Struts::config( 'struts_root_uri' ) . '/javascripts/struts.js',
+				IProperty_Struts::config( 'struts_root_uri' ) . '/javascripts/struts.js',
 				array( 'jquery', 'media-upload' ),
 				null
 			);
@@ -163,7 +163,7 @@ class Struts_Options {
 
 			wp_enqueue_style(
 				'struts-default',
-				Struts::config( 'struts_root_uri' ) . '/stylesheets/default.css'
+				IProperty_Struts::config( 'struts_root_uri' ) . '/stylesheets/default.css'
 			);
 		}
 	}
@@ -171,7 +171,7 @@ class Struts_Options {
 	public function initialize() {
 		// We only want to initialize the options once.
 		if ( $this->is_initialized() ) {
-			throw new StrutsOptionsAlreadyInitializedException( __( 'Options already initialized. Struts no longer requires manual initialization.', 'struts' ) );
+			throw new IPropertyStrutsOptionsAlreadyInitializedException( __( 'Options already initialized. Struts no longer requires manual initialization.', 'struts' ) );
 		} else {
 			$this->is_initialized( true );
 		}
@@ -296,7 +296,7 @@ class Struts_Options {
 	}
 
 	public function add_section( $id, $title, $priority = 35, $description = NULL ) {
-		$this->_sections[$id] = new Struts_Section( $id, $title, $description, $this->name(), $priority );
+		$this->_sections[$id] = new IProperty_Struts_Section( $id, $title, $description, $this->name(), $priority );
 	}
 
 	/**
@@ -310,7 +310,7 @@ class Struts_Options {
 	 * @return Struts_Option
 	 */
 	public function add_option( $name, $type, $section = NULL ) {
-		$option_class = 'Struts_Option_' . ucfirst( $type );
+		$option_class = 'IProperty_Struts_Option_' . ucfirst( $type );
 
 		$option = new $option_class;
 		$option->name( $name );
@@ -320,7 +320,7 @@ class Struts_Options {
 		if ( NULL !== $section ) {
 			$sections = $this->sections();
 			if ( ! isset( $sections[$section] ) ) {
-				throw new SectionNotFoundException( sprintf( __( 'Section with name &lsquo;%1$s&rsquo; not defined', 'struts' ), esc_html( $section ) ) );
+				throw new IPropertySectionNotFoundException( sprintf( __( 'Section with name &lsquo;%1$s&rsquo; not defined', 'struts' ), esc_html( $section ) ) );
 			}
 
 			$option->section( $section );
@@ -370,5 +370,5 @@ class Struts_Options {
 	}
 }
 
-class SectionNotFoundException extends Exception {}
-class StrutsOptionsAlreadyInitializedException extends Exception {}
+class IPropertySectionNotFoundException extends Exception {}
+class IPropertyStrutsOptionsAlreadyInitializedException extends Exception {}

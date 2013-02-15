@@ -1,6 +1,6 @@
 <?php
 
-class Struts {
+class IProperty_Struts {
 	static protected $_config = NULL;
 
 	static public function load_config( array $config ) {
@@ -16,7 +16,8 @@ class Struts {
 	}
 }
 
-function struts_autoloader( $class ) {
+function iproperty_struts_autoloader( $class ) {
+	$class = str_replace( 'IProperty_', '', $class );
 	$filename = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . strtolower( str_replace( '_', DIRECTORY_SEPARATOR, $class ) . '.php' );
 
 	if ( file_exists( $filename ) ) {
@@ -24,7 +25,7 @@ function struts_autoloader( $class ) {
 	}
 }
 
-spl_autoload_register( 'struts_autoloader' );
+spl_autoload_register( 'iproperty_struts_autoloader' );
 
-define( 'STRUTS_DIR', dirname( __FILE__ ) . '/../' );
-define( 'STRUTS_TEMPLATE_DIR', STRUTS_DIR . 'templates/' );
+define( 'IPROPERTY_STRUTS_DIR', dirname( __FILE__ ) . '/../' );
+define( 'IPROPERTY_STRUTS_TEMPLATE_DIR', IPROPERTY_STRUTS_DIR . 'templates/' );
