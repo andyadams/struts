@@ -45,4 +45,30 @@ class IProperty_Struts_Options_Tabbed extends IProperty_Struts_Options {
 
 		return $validated_input;
 	}
+
+	public function add_options_page() {
+		$sections = $this->sections();
+
+		$first_section = reset( $sections );
+
+		// We want the first item in the sub menu to be loaded whenever the parent is clicked,
+		// so we set their slugs to be the same.
+		$top_level_slug = $this->slug() . '-' . $first_section->id();
+
+		if ( $this->is_plugin() ) {
+			add_menu_page( $this->menu_label(), $this->menu_label(), 'manage_options', $top_level_slug, array( &$this, 'form_html' ) );
+		} else {
+			add_menu_page( $this->menu_label(), $this->menu_label(), 'edit_theme_options', $top_level_slug, array( &$this, 'form_html' ) );
+		}
+
+		foreach ( $sections as $section ) {
+			$slug = $this->slug() . '-' . $section->id();
+
+			if ( $this->is_plugin() ) {
+				add_submenu_page( $top_level_slug, $section->title(), $section->title(), 'manage_options', $slug, array( &$this, 'form_html' ) );
+			} else {
+				add_submenu_page( $top_level_slug, $section->title(), $section->title(), 'edit_theme_options', $slug, array( &$this, 'form_html' ) );
+			}
+		}
+	}
 }

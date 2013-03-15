@@ -1,9 +1,19 @@
 <?php
 	$sections = $options->sections();
 
-	if ( isset( $_GET['section'] ) && isset( $sections[$_GET['section']] ) ) {
-		$current_section = $sections[$_GET['section']];
-	} else {
+	if ( isset( $_GET['page'] ) ) {
+		$page = $_GET['page'];
+		// The page will read 'parent_slug-section_id'.
+		// To get the section ID, we simply chop off 'parent_slug-'
+		$section_id = str_replace( $options->slug() . '-', '', $page );
+
+		if ( isset( $sections[$section_id] ) ) {
+			$current_section = $sections[$section_id];
+		}
+	}
+
+	// If the section doesn't exist, just use the first
+	if ( ! isset( $current_section ) ) {
 		$current_section = reset( $sections );
 	}
 
@@ -17,7 +27,7 @@
 	<h2 class="nav-tab-wrapper">
 		<?php foreach ( $sections as $section ) : ?>
 			<?php $is_active = ( $current_section->id() === $section->id() ); ?>
-			<a href="<?php echo esc_url( add_query_arg( 'section', $section->id(), $current_url ) ); ?>" class="nav-tab<?php echo $is_active ? ' nav-tab-active' : ''; ?>">
+			<a href="<?php echo esc_url( add_query_arg( 'page', $options->slug() . '-' . $section->id(), $current_url ) ); ?>" class="nav-tab<?php echo $is_active ? ' nav-tab-active' : ''; ?>">
 				<?php echo $section->title(); ?>
 			</a>
 		<?php endforeach; ?>

@@ -144,7 +144,7 @@ class IProperty_Struts_Options {
 			&&
 			isset( $_GET['page'] )
 			&&
-			$_GET['page'] == $this->slug();
+			( strpos( $_GET['page'], $this->slug() ) !== false );
 
 		if ( $enqueue_scripts ) {
 			wp_enqueue_script( 'jquery' );
