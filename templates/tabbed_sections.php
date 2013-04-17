@@ -20,7 +20,7 @@
 	global $pagenow;
 
 	// Current URL with only 'page' parameter
-	$current_url = add_query_arg( 'page', $options->slug(), '/wp-admin/' . $pagenow );
+	$current_url = add_query_arg( 'page', $options->slug(), admin_url( $pagenow ) );
 ?>
 <div class="wrap">
 	<div id="icon-options-general" class="icon32"><br></div>
